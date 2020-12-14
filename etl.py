@@ -34,7 +34,7 @@ def process_log_file(cur, filepath):
     t = pd.to_datetime(df['ts'], unit='ms', errors='coerce')
     df['ts'] = t
     # insert time data records
-    time_data = [t,
+    time_data = [t.astype(int),
                  (t.dt.hour.astype(int)),
                  (t.dt.day.astype(int)),
                  (t.dt.weekofyear.astype(int)),
