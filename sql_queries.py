@@ -20,7 +20,7 @@ song_table_create = (""" CREATE TABLE songs  (song_id varchar, title VARCHAR, ar
 artist_table_create = (""" CREATE TABLE artists (artist_id VARCHAR, name VARCHAR, location VARCHAR, latitude FLOAT, longitude FLOAT);
 """)
 
-time_table_create = (""" CREATE TABLE time (start_time TIMESTAMP, hour INT, day INT, week INT, month INT, year INT, weekday INT);
+time_table_create = (""" CREATE TABLE time (start_time varchar, hour INT, day INT, week INT, month INT, year INT, weekday INT);
 """)
 
 # INSERT RECORDS

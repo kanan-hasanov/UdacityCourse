@@ -10,12 +10,16 @@ def process_song_file(cur, filepath):
     df = pd.read_json(filepath, lines=True)
 
     # insert song record
-    song_data = df.filter(items=['song_id','title','artist_id','year','duration']).values.tolist()[0]
-    cur.execute(song_table_insert, song_data)
     
-    # insert artist record
-    artist_data = df.filter(items=['artist_id','artist_name','artist_location','artist_latitude','artist_longitude']).values.tolist()[0]
-    cur.execute(artist_table_insert, artist_data)
+    song_data = df.filter(items=['song_id','title','artist_id','year','duration']).values[0].tolist()
+    if len(song_data) != 0:
+        cur.execute(song_table_insert, song_data)
+    
+    # insert artist record'
+    
+    artist_data = df.filter(items=['artist_id','artist_name','artist_location','artist_latitude','artist_longitude']).values[0].tolist()
+    if len(artist_data) != 0:
+        cur.execute(artist_table_insert, artist_data)
 
 
 def process_log_file(cur, filepath):
@@ -26,17 +30,20 @@ def process_log_file(cur, filepath):
     df = df[df['page']=='NextSong']
 
     # convert timestamp column to datetime
-    t = pd.to_datetime(df['ts'], unit='ms')
+
+    t = pd.to_datetime(df['ts'], unit='ms', errors='coerce')
+    df['ts'] = t
     # insert time data records
-    time_data = [list(pd.to_datetime(df['ts'], unit='ms')),
-                list(df['ts'].dt.hour),
-                list(df['ts'].dt.day),
-                list(df['ts'].dt.weekofyear),
-                list(df['ts'].dt.month),
-                list(df['ts'].dt.year),
-                list(df['ts'].dt.weekday)]
+    time_data = [t,
+                 (t.dt.hour.astype(int)),
+                 (t.dt.day.astype(int)),
+                 (t.dt.weekofyear.astype(int)),
+                 (t.dt.month.astype(int)),
+                 (t.dt.year.astype(int)),
+                 (t.dt.weekday.astype(int))
+                ]
     column_labels = ['start_time','hour','day', 'week','month','year','weekday']
-    time_df = pd.DataFrame(time_data,index=column_labels).T
+    time_df =  pd.DataFrame(time_data,index=column_labels).T.drop_duplicates().reset_index(drop=True)
 
     for i, row in time_df.iterrows():
         cur.execute(time_table_insert, list(row))
