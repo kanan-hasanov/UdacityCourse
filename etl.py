@@ -6,7 +6,8 @@ from sql_queries import *
 
 
 def process_song_file(cur, filepath):
-    """ Loads records to tables (songs, artists) """
+    """ Loads records to tables (songs, artists) 
+    """
     
     # open song file
     df = pd.read_json(filepath, lines=True)
@@ -26,8 +27,8 @@ def process_song_file(cur, filepath):
         cur.execute(artist_table_insert, artist_data)
 
 
-def process_log_file(cur, filepath
-     """ Loads records to tables (time, users, songplays)  """
+def process_log_file(cur, filepath):
+    """ Loads records to tables (time, users, songplays)"""
                      
     # open log file
     df = pd.read_json(filepath, lines=True)
@@ -78,7 +79,8 @@ def process_log_file(cur, filepath
 
 
 def process_data(cur, conn, filepath, func):
- """ For each file with extension JSON found in directory calls provided function"""
+    """ For each file with extension JSON found in directory calls provided function
+    """
                      
     # get all files matching extension from directory
     all_files = []
@@ -99,8 +101,9 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
-     """ Function creates connection to the Database Sparkify
-     and Orchestrates ETL process"""
+    
+    """ Function creates connection to the Database Sparkify
+    and Orchestrates ETL process"""
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
