@@ -9,9 +9,11 @@ Tables:
 `songplays`
 `time`
 
-# Data: Each log is a JSON file.
+# Data: 
+Each log is a JSON file.
 
-### ETL Process: The code consumes all provided json files and loads data to created tables.
+### ETL Process: 
+The code consumes all provided json files and loads data to created tables.
 
 Step 1: Launch Terminal
 
@@ -20,7 +22,7 @@ Step 2:
 
 `python etl.py`             :This will populate created tables with data.
 
-Project File Structure:
+### Project File Structure:
 
 `sql_queries.py`    - SQL scripts that is being used during run time to Drop/Create tables, Select/Insert data to the tables;
 
