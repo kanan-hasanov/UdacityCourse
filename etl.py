@@ -6,23 +6,29 @@ from sql_queries import *
 
 
 def process_song_file(cur, filepath):
+    """ Loads records to tables (songs, artists) """
+    
     # open song file
     df = pd.read_json(filepath, lines=True)
 
-    # insert song record
-    
+    # insert song records
     song_data = df.filter(items=['song_id','title','artist_id','year','duration']).values[0].tolist()
+    
+    # executes only non empty rows
     if len(song_data) != 0:
         cur.execute(song_table_insert, song_data)
     
     # insert artist record'
-    
     artist_data = df.filter(items=['artist_id','artist_name','artist_location','artist_latitude','artist_longitude']).values[0].tolist()
+    
+    # executes only non empty rows
     if len(artist_data) != 0:
         cur.execute(artist_table_insert, artist_data)
 
 
-def process_log_file(cur, filepath):
+def process_log_file(cur, filepath
+     """ Loads records to tables (time, users, songplays)  """
+                     
     # open log file
     df = pd.read_json(filepath, lines=True)
 
@@ -30,7 +36,6 @@ def process_log_file(cur, filepath):
     df = df[df['page']=='NextSong']
 
     # convert timestamp column to datetime
-
     t = pd.to_datetime(df['ts'], unit='ms', errors='coerce')
     df['ts'] = t
     # insert time data records
@@ -73,6 +78,8 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+ """ For each file with extension JSON found in directory calls provided function"""
+                     
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -92,6 +99,8 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
+     """ Function creates connection to the Database Sparkify
+     and Orchestrates ETL process"""
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
