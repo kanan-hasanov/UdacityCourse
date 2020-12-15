@@ -9,7 +9,7 @@ Tables:
 `songplays`
 `time`
 
-# # Data: Each log is a JSON file.
+# Data: Each log is a JSON file.
 
 ETL Process: The code consumes all provided json files and loads data from created tables.
 
