@@ -11,7 +11,7 @@ Tables:
 
 # Data: Each log is a JSON file.
 
-ETL Process: The code consumes all provided json files and loads data to created tables.
+### ETL Process: The code consumes all provided json files and loads data to created tables.
 
 Step 1: Launch Terminal
 
