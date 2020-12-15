@@ -18,8 +18,7 @@ Step 1: Launch Terminal
 Step 2: 
     Run:
         `python create_tables.py`   :This will drop/create empty tables in Sparkify database.
-        
-        ```python etl.py```            :This will populate created tables with data.
+        `python etl.py`             :This will populate created tables with data.
 
 Project File Structure:
 
