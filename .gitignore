@@ -1,0 +1,5 @@
+# debug.log $ git rm --cached debug.log rm .DS_Store $ git commit -m Start ignoring .DS_Store
+
+.DS_Store
+/.DS_Store
+
