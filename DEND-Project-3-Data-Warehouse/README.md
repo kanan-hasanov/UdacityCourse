@@ -8,7 +8,6 @@ Building SQL scripts and Python ETL pipeline that extracts the data from S3, sta
 Star schema is chosen in order to simplify queries, because less joins are needed to answer the same questions.
 
 ### The structure of the project:
-
 `create_tables.py` creates the Sparkify star schema in Redshift
 
 `etl.py` defines the ETL pipeline, extracts data from S3, loads into staging tables on Redshift, inserts into analytics tables on Redshift
@@ -17,8 +16,7 @@ Star schema is chosen in order to simplify queries, because less joins are neede
 
 `dwh.cfg` configuration file that needs to be modified by a user looks like below:
 
-
-``[CLUSTER]
+/[CLUSTER]
 
 HOST=<>
 
@@ -42,8 +40,7 @@ LOG_DATA='s3://udacity-dend/log_data'
 LOG_JSONPATH='s3://udacity-dend/log_json_path.json'
 
 SONG_DATA='s3://udacity-dend/song_data'
-
-``
+/
 
 ## Database Schema
 fact table:
@@ -64,4 +61,4 @@ python etl.py
 Query Example:
 -- top 10 rows from tables songplay and songs
 
-select top  10* from songs s join songplay sp on s.song_id = sp.song_id join users u on u.user_id = sp.user_id ;
+`select top  10* from songs s join songplay sp on s.song_id = sp.song_id join users u on u.user_id = sp.user_id ;`
