@@ -16,7 +16,7 @@ Star schema is chosen in order to simplify queries, because less joins are neede
 
 `dwh.cfg` configuration file that needs to be modified by a user looks like below:
 
-'''[CLUSTER]
+```[CLUSTER]
 
 HOST=<>
 
@@ -40,7 +40,7 @@ LOG_DATA='s3://udacity-dend/log_data'
 LOG_JSONPATH='s3://udacity-dend/log_json_path.json'
 
 SONG_DATA='s3://udacity-dend/song_data'
-'''
+```
 
 ## Database Schema
 fact table:
